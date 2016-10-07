@@ -1,0 +1,34 @@
+# globals
+
+export DISCOVERY_URLS=${DISCOVERY_URLS:=https://dal05.objectstorage.softlayer.net/v1/AUTH_773b8ed6-b3c8-4683-9d7a-dbe2ee11095e/volcano https://tok02.objectstorage.softlayer.net/v1/AUTH_773b8ed6-b3c8-4683-9d7a-dbe2ee11095e/volcano https://lon02.objectstorage.softlayer.net/v1/AUTH_773b8ed6-b3c8-4683-9d7a-dbe2ee11095e/volcano}
+
+export BLOCKS_URLS=${BKSYNC_URLS:=169.45.159.51 161.202.87.188 159.122.239.109}
+
+export PORT=${PORT:=33303}
+
+export HOSTNAME=${HOSTNAME:=$(hostname -s)}
+
+export IDENTITY=${IDENTITY:=$(uname -m)-$HOSTNAME}
+
+export PASSWD=${PASSWD:=$(tr -dc \*\$A-Za-z0-9-_ < /dev/urandom | head -c${1:-32})}
+
+export KDF=${KDF:=--lightkdf}
+
+export PING_HOST=${PING_HOST:=198.60.22.2}
+
+# want this to be SNAP_USER_DATA but it doesn't seem to get copied b/n versions and causes block resyncs
+export COLONUS_DIR=$SNAP_COMMON/eth
+
+export ETHEREUM_DIR=$SNAP_COMMON/.ethereum
+
+export MAXPEERS=${MAXPEERS:=12}
+
+export GETH_LOG=${GETH_LOG:=/tmp/geth.log}
+
+awk() {
+    gawk "$@"
+}
+export -f awk
+
+export PATH=$(dirname $0):$(dirname $0)/geth:$PATH
+

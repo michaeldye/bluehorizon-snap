@@ -1,0 +1,69 @@
+name: bluehorizon
+version: 1.6.13
+summary: Horizon Decentralized Autonomous Edge Compute System...
+description: This snap includes all Horizon system control components...
+confinement: devmode
+epoch: 0
+grade: devel
+
+apps:
+  anax:
+    command: scripts/anax/anax.sh
+    daemon: simple
+    plugs: [firewall-control, network, network-bind]
+    restart-condition: always
+
+  ethereum:
+    command: scripts/geth/geth.sh
+    daemon: simple
+    plugs: [network, network-bind]
+    restart-condition: always
+
+  eth-handout:
+    command: scripts/geth/handout.sh
+    daemon: simple
+    plugs: [network]
+    restart-condition: always
+
+  eth-unlock:
+    command: scripts/geth/unlock.sh
+    daemon: simple
+    plugs: [network]
+    restart-condition: always
+
+  eth-blockmon:
+    command: scripts/geth/blockmon.sh
+    daemon: simple
+    plugs: [network]
+    restart-condition: always
+
+parts:
+  anax:
+    plugin: make
+    build-packages:
+      - golang
+      - git
+    stage-packages:
+      - bash
+      - curl
+      - gettext
+      - jq
+    source: https://github.com/open-horizon/anax.git
+
+  ethereum:
+    plugin: make
+    build-packages:
+      - curl
+      - build-essential
+    stage-packages:
+      - bash
+      - bc
+      - curl
+      - jq
+      - gawk
+      - coreutils
+    source: ethereum/
+
+  horizon-distribution:
+    plugin: dump
+    source: distribution/
