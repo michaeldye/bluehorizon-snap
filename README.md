@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project contains the Horizon client system bootstrapped to the Blue Horizon managed infrastructure.  You can install the client on a Ubuntu Snap capable system by executing `snap install --devmode --edge bluehorizon`. Alternatively, you can download a complete system image for various SBCs at http://bluehorizon.network.
+This project contains the Horizon client system bootstrapped to the Blue Horizon managed infrastructure.  You can install the client on a Ubuntu Snap capable system by executing `snap install --devmode --beta bluehorizon`. Alternatively, you can download a complete system image for various SBCs at http://bluehorizon.network.
 
 Related Projects:
 

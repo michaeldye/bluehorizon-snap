@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-# anax-wrapper.bash: a snappy wrapper for the anax horizon-os daemon
+# anax.sh: a snappy wrapper for the anax horizon system
 # author: mdye@us.ibm.com
 #
 
@@ -35,4 +35,4 @@ ANAX_LOG_LEVEL=${ANAX_LOG_LEVEL:=3}
 # for help debugging startup
 env
 
-anax -v=$ANAX_LOG_LEVEL -alsologtostderr -config <(cat $SNAP_DATA/anax/config.tmpl | envsubst)
+anax -v=$ANAX_LOG_LEVEL -alsologtostderr -config <($(dirname $0)/render-config.sh $SNAP_DATA/anax/config.tmpl)
