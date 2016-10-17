@@ -13,7 +13,7 @@ if ! [ "$(ls -A $SNAP_DATA/)" ]; then
   cp -Rfap "$SNAP/seed/data/." $SNAP_DATA/
 
   # fake gopath for contracts
-  C_PATH=$SNAP_DATA/go/src/repo.hovitos.engineering/MTN/go-solidity/
+  C_PATH=$SNAP_DATA/go/src/github.com/open-horizon/go-solidity/
   mkdir -p $C_PATH && \
     ln -s $SNAP/contracts $C_PATH/
 fi
