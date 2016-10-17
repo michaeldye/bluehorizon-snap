@@ -13,8 +13,6 @@ Related Projects:
 
 ### Preconditions
 
-* (until all sources open): `git config --global url.ssh://git@repo.hovitos.engineering:10022/.insteadOf https://repo.hovitos.engineering/`
-* Write SSH deploy key to `~/.ssh/` and set up `~/.ssh/config` to use the appropriate key for the repo above
 * A development system running Ubuntu 16.04 classic with the packages `snapd` and `snapcraft` installed
 * To publish the snap, an account at myapps.developer.ubuntu.com and listing as a collaborator on the bluehorizon project (contact mdye for this access)
 
