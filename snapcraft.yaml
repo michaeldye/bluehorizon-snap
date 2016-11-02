@@ -1,5 +1,5 @@
 name: bluehorizon
-version: 1.6.16
+version: 1.6.17
 summary: Horizon Decentralized Autonomous Edge Compute System...
 description: This snap includes all Horizon system control components...
 confinement: devmode
@@ -50,6 +50,7 @@ parts:
       - jq
     source: https://github.com/open-horizon/anax.git
     source-branch: version/1
+
 
   ethereum:
     plugin: make
