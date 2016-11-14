@@ -76,9 +76,13 @@ geth_getblocks()
 
 			BLOCK_SERVERS=$(
 				for i in $BLOCKS_URLS
+				#do
+				#	ping -c 1 $i | grep "bytes from"
+				#done | sed 's/=/ /g' | sort -n -k10 | sed 's/:/ /g' | awk '{print $4}'
 				do
-					ping -c 1 $i | grep "bytes from"
-				done | sed 's/=/ /g' | sort -n -k10 | sed 's/:/ /g' | awk '{print $4}'
+					echo -n "$i "
+					ping -c 5 $i | grep '^rtt'
+				done | sed 's!/! !g' | sort -n -k9 | awk '{print $1}'
 			)
 
 			FAST=$(echo $BLOCK_SERVERS | awk '{print $1}')
