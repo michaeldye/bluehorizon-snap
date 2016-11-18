@@ -1,13 +1,32 @@
 {
-  "TorrentDir": "${SNAP_COMMON}/torrent",
-  "APIListen": "0.0.0.0:80",
-  "DBPath": "${SNAP_COMMON}/",
-  "GethURL": "http://127.0.0.1:8545",
-  "DockerEndpoint": "unix:///var/run/docker.sock",
-  "StaticWebContent": "${SNAP}/srv/static",
-  "PublicKeyPath": "${SNAP_DATA}/anax/mtn-publicKey.pem",
-  "CACertsPath": "${SNAP_DATA}/anax/horizon.pem",
-  "MicropaymentEnforced": true,
-  "DefaultCPUSet": "${HORIZON_WORKLOAD_CPUSET}",
-  "WorkloadROStorage": "${SNAP_COMMON}/workload_ro"
+  "Edge": {
+    "TorrentDir": "${SNAP_COMMON}/torrent",
+    "APIListen": "0.0.0.0:80",
+    "DBPath": "${SNAP_COMMON}/",
+    "GethURL": "http://127.0.0.1:8545",
+    "DockerEndpoint": "unix:///var/run/docker.sock",
+    "StaticWebContent": "${SNAP}/srv/static",
+    "PublicKeyPath": "${SNAP_DATA}/anax/mtn-publicKey.pem",
+    "CACertsPath": "${SNAP_DATA}/anax/horizon.pem",
+    "DefaultCPUSet": "${HORIZON_WORKLOAD_CPUSET}",
+    "WorkloadROStorage": "${SNAP_COMMON}/workload_ro",
+    "ExchangeURL": "${CMTN_EXCHANGE_URL}",
+    "PolicyPath": "${SNAP_COMMON}/policy.d/",
+    "ExchangeHeartbeat": 60,
+    "AgreementTimeoutS": 180
+  },
+  "AgreementBot": {
+    "DBPath": "${SNAP_COMMON}/agbot/",
+    "GethURL": "http://127.0.0.1:8545",
+    "TxLostDelayTolerationSeconds": 240,
+    "AgreementWorkers": 5,
+    "AgreementTimeoutS": 180,
+    "PolicyPath": "${SNAP_COMMON}/agbot/policy.d/",
+    "NewContractIntervalS": 15,
+    "ProcessGovernanceIntervalS": 10,
+    "IgnoreContractWithAttribs": "ethereum_account",
+    "ExchangeURL": "${CMTN_EXCHANGE_URL}",
+    "ExchangeHeartbeat": 60,
+    "ActiveDeviceTimeoutS": 180
+  }
 }

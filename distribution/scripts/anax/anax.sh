@@ -9,6 +9,19 @@ if ! [ -e "$SNAP_COMMON"/workload_ro ]; then
   mkdir -p "$SNAP_COMMON"/workload_ro
 fi
 
+if ! [ -e "$SNAP_COMMON"/policy.d ]; then
+  mkdir -p "$SNAP_COMMON"/policy.d
+fi
+
+# setup agbot specific directories
+if ! [ -e "$SNAP_COMMON"/agbot ]; then
+  mkdir -p "$SNAP_COMMON"/agbot
+fi
+
+if ! [ -e "$SNAP_COMMON"/agbot/policy.d ]; then
+  mkdir -p "$SNAP_COMMON"/agbot/policy.d
+fi
+
 if ! [ "$(ls -A $SNAP_DATA/)" ]; then
   cp -Rfap "$SNAP/seed/data/." $SNAP_DATA/
 
@@ -36,6 +49,10 @@ export CMTN_WHISPER_ADDRESS_PATH=${CMTN_WHISPER_ADDRESS_PATH:=$SNAP_COMMON/eth/s
 export mtn_soliditycontract_block_read_delay=${mtn_soliditycontract_block_read_delay:=3}
 
 export CMTN_DIRECTORY_VERSION=${CMTN_DIRECTORY_VERSION:=$(cat $(sourceOverrideOrDefaultPath "horizon_directory_version"))}
+
+export CMTN_EXCHANGE_URL=${CMTN_EXCHANGE_URL:=$(cat $(sourceOverrideOrDefaultPath "horizon_exchange_url"))}
+
+export CMTN_DATA_VERIFICATION_URL=${CMTN_DATA_VERIFICATION_URL:=$(cat $(sourceOverrideOrDefaultPath "horizon_data_verification_url"))}
 
 export CMTN_DEVICE_ID=${CMTN_DEVICE_ID:=$(cat $SNAP_COMMON/config/device_id)}
 
