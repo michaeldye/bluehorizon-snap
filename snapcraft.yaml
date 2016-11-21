@@ -1,5 +1,5 @@
 name: bluehorizon
-version: 1.6.17
+version: 1.6.18
 summary: Horizon Decentralized Autonomous Edge Compute System...
 description: This snap includes all Horizon system control components...
 confinement: devmode
