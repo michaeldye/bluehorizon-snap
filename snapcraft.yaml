@@ -50,6 +50,15 @@ parts:
       - jq
     source: https://github.com/open-horizon/anax.git
 
+  anax-ui:
+    plugin: make
+    build-packages:
+      - git
+      - nodejs
+    stage-packages:
+      - bash
+    source: https://github.com/open-horizon/anax-ui.git
+
   ethereum:
     plugin: make
     build-packages:
