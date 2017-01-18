@@ -1,8 +1,22 @@
 # globals
 
-export DISCOVERY_URLS=${DISCOVERY_URLS:=https://dal05.objectstorage.softlayer.net/v1/AUTH_773b8ed6-b3c8-4683-9d7a-dbe2ee11095e/volcano https://tok02.objectstorage.softlayer.net/v1/AUTH_773b8ed6-b3c8-4683-9d7a-dbe2ee11095e/volcano https://lon02.objectstorage.softlayer.net/v1/AUTH_773b8ed6-b3c8-4683-9d7a-dbe2ee11095e/volcano}
+. $(dirname $0)/blockchainconfig
 
-export BLOCKS_URLS=${BKSYNC_URLS:=169.45.159.51 161.202.87.188 159.122.239.109}
+export CHAIN=${CHAIN:=volcano}
+
+if [ "$CHAIN" = "volcano" ]
+then
+	export BLOCKS_URLS=${BKSYNC_URLS:=169.45.159.51 161.202.87.188 159.122.239.109}
+	export CHAINDATA_DIR=chaindata
+fi
+
+if [ "$CHAIN" = "bluehorizon" ]
+then
+	export BLOCKS_URLS=${BKSYNC_URLS:=169.44.63.234 159.122.228.25 161.202.82.19}
+	export CHAINDATA_DIR=geth/chaindata
+fi
+
+export DISCOVERY_URLS=${DISCOVERY_URLS:=https://dal05.objectstorage.softlayer.net/v1/AUTH_773b8ed6-b3c8-4683-9d7a-dbe2ee11095e/$CHAIN https://tok02.objectstorage.softlayer.net/v1/AUTH_773b8ed6-b3c8-4683-9d7a-dbe2ee11095e/$CHAIN https://lon02.objectstorage.softlayer.net/v1/AUTH_773b8ed6-b3c8-4683-9d7a-dbe2ee11095e/$CHAIN}
 
 export PORT=${PORT:=33303}
 
@@ -16,19 +30,13 @@ export KDF=${KDF:=--lightkdf}
 
 export PING_HOST=${PING_HOST:=198.60.22.2}
 
-# want this to be SNAP_USER_DATA but it doesn't seem to get copied b/n versions and causes block resyncs
-export COLONUS_DIR=$SNAP_COMMON/eth
+export COLONUS_DIR=${COLONUS_DIR:=$HOME/.colonus}
 
-export ETHEREUM_DIR=$SNAP_COMMON/.ethereum
+export ETHEREUM_DIR=${ETHEREUM_DIR:=$HOME/.ethereum}
 
 export MAXPEERS=${MAXPEERS:=12}
 
 export GETH_LOG=${GETH_LOG:=/tmp/geth.log}
-
-awk() {
-    gawk "$@"
-}
-export -f awk
 
 export PATH=$(dirname $0):$(dirname $0)/geth:$PATH
 
