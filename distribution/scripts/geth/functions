@@ -34,6 +34,16 @@ geth_account()
 }
 
 
+read_account()
+{
+	ACCOUNT=$(cat $COLONUS_DIR/accounts | head -1)
+	test "$ACCOUNT" || return 1
+	ACCOUNT="0x$(echo $ACCOUNT | sed 's/^0x//')"
+	echo $ACCOUNT
+	return 0
+}
+
+
 # do not return until a ping
 # TODO: support a timeout
 
@@ -63,13 +73,15 @@ geth_getblocks()
 
 	if [ "$1" == "CLEAN" ]
 	then
-		rm -rf $ETHEREUM_DIR/chaindata
+		rm -rf $ETHEREUM_DIR/$CHAINDATA_DIR
 		rm -f $COLONUS_DIR/getblocks.flag
 	fi
 
-	if [ ! -d "$ETHEREUM_DIR/chaindata" -o ! -r "$COLONUS_DIR/getblocks.flag" ]
+	if [ ! -d "$ETHEREUM_DIR/$CHAINDATA_DIR" -o ! -r "$COLONUS_DIR/getblocks.flag" ]
 	then
 		echo "getting blocks" >&3
+
+		START=$(date +%s)
 
 		while [ ! -r "$COLONUS_DIR/getblocks.flag" ]
 		do
@@ -304,7 +316,7 @@ geth_peercount()
 
 geth_unlockaccount_geth()
 {
-	R=$(geth --exec personal.unlockAccount\(\"$(cat $COLONUS_DIR/accounts)\",\"$(cat $COLONUS_DIR/passwd)\",0\) attach rpc:http://127.0.0.1:8545)
+	R=$(geth --exec personal.unlockAccount\(\"$(read_account)\",\"$(cat $COLONUS_DIR/passwd)\",0\) attach rpc:http://127.0.0.1:8545)
 
 	if [ "$R" = "true" ]
 	then
@@ -317,7 +329,7 @@ geth_unlockaccount_geth()
 
 geth_unlockaccount()
 {
-	ACCOUNT=$(cat $COLONUS_DIR/accounts)
+	ACCOUNT=$(read_account)
 	PASSWD=$(cat $COLONUS_DIR/passwd)
 
 	if R=$(curl --speed-limit 1 --speed-time 30 -sL http://127.0.0.1:8545 -X POST --data '{"jsonrpc":"2.0","method":"personal_unlockAccount","params":["'$ACCOUNT'","'$PASSWD'",0],"id":1}' | jq -r '.result' ; exit $(( $PIPESTATUS + $? )) )
@@ -338,7 +350,7 @@ geth_unlockaccount()
 
 geth_accountbalance()
 {
-	ACCOUNT=$1
+	ACCOUNT=0x${1}
 
 	if R=$(curl --speed-limit 1 --speed-time 30 -sL http://127.0.0.1:8545 -X POST --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["'$ACCOUNT'","latest"],"id":1}' | jq -r '.result' ; exit $(( $PIPESTATUS + $? )) )
 	then
@@ -347,6 +359,7 @@ geth_accountbalance()
 		return 0
 	fi
 
+	echo 0
 	return 1
 }
 

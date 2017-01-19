@@ -1,0 +1,13 @@
+# environmental variable settings for blockchain
+
+export CHAIN=bluehorizon
+
+export COLONUS_DIR=$SNAP_COMMON/eth
+
+export ETHEREUM_DIR=$SNAP_COMMON/.ethereum
+
+awk() {
+    gawk "$@"
+}
+export -f awk
+

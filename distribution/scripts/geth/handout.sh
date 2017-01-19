@@ -27,7 +27,7 @@ do
 		continue
 	fi
 
-	MYA=$(cat $COLONUS_DIR/accounts)
+	MYA=$(head -1 $COLONUS_DIR/accounts)
 
 	if (( $(echo -n $MYA | wc -c) != 40 ))
 	then
@@ -128,7 +128,7 @@ do
 		fi
 
 		# finally whisper something
-		R=$(curl --speed-limit 1 --speed-time 30 -sL http://127.0.0.1:8545 -X POST --data '{"jsonrpc":"2.0","method":"shh_post","params":[{"from":"'$ID'","topics": ["0x'$T'"],"payload":"0x'$M'","ttl":15,"priority":"0x64"}],"id":1}' | jq -r '.result')
+		R=$(curl --speed-limit 1 --speed-time 30 -sL http://127.0.0.1:8545 -X POST --data '{"jsonrpc":"2.0","method":"shh_post","params":[{"from":"'$ID'","topics": ["0x'$T'"],"payload":"0x'$M'","ttl":"0xf","priority":"0x64"}],"id":1}' | jq -r '.result')
 
 		if [ "$R" = "true" ]
 		then

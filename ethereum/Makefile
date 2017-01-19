@@ -11,7 +11,7 @@ install: all
 
 geth-$(ARCH):
 # TODO: ensure objectstore doesn't cache copies such that we might miss a newly-uploaded one
-	curl -o geth-$(ARCH) http://1DD40.http.tor01.cdn.softlayer.net/geth-bins/geth-$(ARCH)
+	curl -o geth-$(ARCH) http://1DD40.http.tor01.cdn.softlayer.net/geth-bins/geth-1.5.7-$(ARCH)
 	chmod +x geth-$(ARCH)
 
 string2hex-$(ARCH):
