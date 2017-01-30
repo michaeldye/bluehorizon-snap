@@ -22,14 +22,16 @@ if ! [ -e "$SNAP_COMMON"/agbot/policy.d ]; then
   mkdir -p "$SNAP_COMMON"/agbot/policy.d
 fi
 
-if ! [ "$(ls -A $SNAP_DATA/)" ]; then
-  cp -Rfap "$SNAP/seed/data/." $SNAP_DATA/
+# always remove the data and copy it again. 
+# this will make sure the updated snap gets the updated seed data.
+rm -Rf $SNAP_DATA/*
+cp -Rfap "$SNAP/seed/data/." $SNAP_DATA/
 
-  # fake gopath for contracts
-  C_PATH=$SNAP_DATA/go/src/github.com/open-horizon/go-solidity/
-  mkdir -p $C_PATH && \
+# fake gopath for contracts
+C_PATH=$SNAP_DATA/go/src/github.com/open-horizon/go-solidity/
+mkdir -p $C_PATH && \
     ln -s $SNAP/contracts $C_PATH/
-fi
+
 
 function sourceOverrideOrDefaultPath() {
   if [ -e "${SNAP_COMMON}/config/$1" ]; then
