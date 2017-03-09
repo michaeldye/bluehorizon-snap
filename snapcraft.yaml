@@ -13,30 +13,6 @@ apps:
     plugs: [firewall-control, network, network-bind]
     restart-condition: always
 
-  ethereum:
-    command: scripts/geth/geth.sh
-    daemon: simple
-    plugs: [network, network-bind]
-    restart-condition: always
-
-  eth-handout:
-    command: scripts/geth/handout.sh
-    daemon: simple
-    plugs: [network]
-    restart-condition: always
-
-  eth-unlock:
-    command: scripts/geth/unlock.sh
-    daemon: simple
-    plugs: [network]
-    restart-condition: always
-
-  eth-blockmon:
-    command: scripts/geth/blockmon.sh
-    daemon: simple
-    plugs: [network]
-    restart-condition: always
-
 parts:
   anax:
     plugin: make
@@ -58,20 +34,6 @@ parts:
     stage-packages:
       - bash
     source: https://github.com/open-horizon/anax-ui.git
-
-  ethereum:
-    plugin: make
-    build-packages:
-      - curl
-      - build-essential
-    stage-packages:
-      - bash
-      - bc
-      - curl
-      - jq
-      - gawk
-      - coreutils
-    source: ethereum/
 
   horizon-distribution:
     plugin: dump
