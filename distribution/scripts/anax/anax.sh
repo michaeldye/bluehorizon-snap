@@ -56,6 +56,8 @@ export CMTN_EXCHANGE_URL=${CMTN_EXCHANGE_URL:=$(cat $(sourceOverrideOrDefaultPat
 
 export CMTN_DATA_VERIFICATION_URL=${CMTN_DATA_VERIFICATION_URL:=$(cat $(sourceOverrideOrDefaultPath "horizon_data_verification_url"))}
 
+export CMTN_BLOCKCHAIN=${CMTN_BLOCKCHAIN:=$(cat $(sourceOverrideOrDefaultPath "horizon_blockchain"))}
+
 export CMTN_DEVICE_ID=${CMTN_DEVICE_ID:=$(cat $SNAP_COMMON/config/device_id)}
 
 # anax envvars
