@@ -22,7 +22,7 @@ if ! [ -e "$SNAP_COMMON"/agbot/policy.d ]; then
   mkdir -p "$SNAP_COMMON"/agbot/policy.d
 fi
 
-# always remove the data and copy it again. 
+# always remove the data and copy it again.
 # this will make sure the updated snap gets the updated seed data.
 rm -Rf $SNAP_DATA/*
 cp -Rfap "$SNAP/seed/data/." $SNAP_DATA/
@@ -66,4 +66,4 @@ ANAX_LOG_LEVEL=${ANAX_LOG_LEVEL:=3}
 # write out rendered config file for investigation later
 $(dirname $0)/render-config.sh $(sourceOverrideOrDefaultPath "anax.json.tmpl") > ${SNAP_DATA}/anax/rendered-config.json
 
-anax -v=$ANAX_LOG_LEVEL -alsologtostderr -config $SNAP_DATA/anax/rendered-config.json
+anax -v=$ANAX_LOG_LEVEL -logtostderr -config $SNAP_DATA/anax/rendered-config.json
