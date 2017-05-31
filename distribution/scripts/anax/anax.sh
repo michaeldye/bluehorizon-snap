@@ -27,12 +27,6 @@ fi
 rm -Rf $SNAP_DATA/*
 cp -Rfap "$SNAP/seed/data/." $SNAP_DATA/
 
-# fake gopath for contracts
-C_PATH=$SNAP_DATA/go/src/github.com/open-horizon/go-solidity/
-mkdir -p $C_PATH && \
-    ln -s $SNAP/contracts $C_PATH/
-
-
 function sourceOverrideOrDefaultPath() {
   if [ -e "${SNAP_COMMON}/config/$1" ]; then
     echo "${SNAP_COMMON}/config/$1"
@@ -42,7 +36,7 @@ function sourceOverrideOrDefaultPath() {
 }
 
 # for go-solidity contract loading
-export GOPATH=$SNAP_DATA/go
+export GOPATH=$SNAP/go
 
 # path for state saved by app
 export CMTN_WHISPER_ADDRESS_PATH=${CMTN_WHISPER_ADDRESS_PATH:=$SNAP_COMMON/eth/shhid}
