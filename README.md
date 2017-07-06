@@ -2,12 +2,15 @@
 
 ## Introduction
 
+**NOTE**: This project is deprecated in favor of http://github.com/open-horizon/horizon-pkg.
+
 This project contains the Horizon client system bootstrapped to the Blue Horizon managed infrastructure.  You can install the client on a Ubuntu Snap capable system by executing `snap install --devmode --beta bluehorizon`. Alternatively, you can download a complete system image for various SBCs at http://bluehorizon.network.
 
 Related Projects:
 
 * `anax` (http://github.com/open-horizon/anax): The client control application in the Horizon system
-* `ubuntu-classic-image` (http://github.com/open-horizon/ubuntu-classic-image): Produces complete system images
+* `raspbian-image` (http://github.com/open-horizon/raspbian-image): The Raspbian image builder for Raspberry Pi 2 and 3 models dedicated to Horizon
+* `horizon-pkg` (http://github.com/open-horizon/horizon-pkg): A system for packaging Horizon system `deb`s for multiple distributions and architectures. It also produces Ubuntu snaps
 
 ## Operations
 
